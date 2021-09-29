@@ -95,10 +95,6 @@ public class MovieRepository {
         return getMovie("SELECT * FROM movies ORDER BY RAND() LIMIT 1");
     }
 
-    public List<Movie> getTopTenPopularMovies() {
-        return getMovies("SELECT * FROM movies ORDER BY  popularity DESC LIMIT 10;");
-    }
-
     public int getMoviesAwardWinner() {
         return getMovie("SELECT count(*) as id, title, year, length, subject, popularity, awards  FROM movies WHERE awards = 'Yes';").getId();
     }

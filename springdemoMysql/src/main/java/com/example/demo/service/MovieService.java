@@ -5,6 +5,8 @@ import com.example.demo.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -30,7 +32,13 @@ public class MovieService {
     }
 
     public List<Movie> getTopTenPopularMovies() {
-        return movieRepository.getTopTenPopularMovies();
+        List<Movie> movies = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            movies.add(movieRepository.getRandomMovie());
+        }
+
+        Collections.sort(movies);
+        return movies;
     }
 
     public List<Movie> getMovieByFilter(char character, int amount) {

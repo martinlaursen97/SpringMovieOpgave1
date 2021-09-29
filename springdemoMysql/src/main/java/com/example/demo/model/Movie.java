@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private int id;
     private String title;
     private int year;
@@ -86,5 +86,10 @@ public class Movie {
 
     public void setAwards(String awards) {
         this.awards = awards;
+    }
+
+    @Override
+    public int compareTo(Movie o) {
+        return o.getPopularity() - this.popularity;
     }
 }
