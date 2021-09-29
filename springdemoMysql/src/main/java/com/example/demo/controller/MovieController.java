@@ -3,14 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.model.Movie;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class MovieController {
 
     private final MovieService movieService;
@@ -21,49 +20,41 @@ public class MovieController {
     }
 
     @GetMapping()
-    @ResponseBody
     public String displayGreeting() {
         return movieService.displayGreeting();
     }
 
-    @GetMapping(path = "/getFirst")
-    @ResponseBody
+    @GetMapping("/getFirst")
     public Movie getFirstMovie() {
         return movieService.getFirstMovie();
     }
 
-    @GetMapping(path = "/getRandom")
-    @ResponseBody
+    @GetMapping("/getRandom")
     public Movie getRandomMovie() {
         return movieService.getRandomMovie();
     }
 
-    @GetMapping(path = "/getTenSortByPopularity")
-    @ResponseBody
+    @GetMapping("/getTenSortByPopularity")
     public List<Movie> getTopTenPopularMovies() {
         return movieService.getTopTenPopularMovies();
     }
 
-    @GetMapping(path = "/howManyWonAnAward")
-    @ResponseBody
+    @GetMapping("/howManyWonAnAward")
     public int getMoviesAwardWinner() {
         return movieService.getMoviesAwardWinner();
     }
 
-    @GetMapping(path = "/filter")
-    @ResponseBody
+    @GetMapping("/filter")
     public List<Movie> getMoviesByFilter(@RequestParam char character, int amount) {
         return movieService.getMovieByFilter(character, amount);
     }
 
-    @GetMapping(path = "/howManySequels")
-    @ResponseBody
+    @GetMapping("/howManySequels")
     public String getMovieSequels(@RequestParam String g1, String g2) {
         return movieService.getMovieSequels(g1, g2);
     }
 
-    @GetMapping(path = "/comedyAwardWinners")
-    @ResponseBody
+    @GetMapping("/comedyAwardWinners")
     public List<Movie> getComedyAwardWinners() {
         return movieService.getComedyAwardWinners();
     }
