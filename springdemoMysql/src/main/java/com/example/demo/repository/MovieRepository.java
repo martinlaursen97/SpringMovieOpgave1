@@ -33,16 +33,15 @@ public class MovieRepository {
         Movie movie = null;
 
         try {
-            while (resultSet.next()) {
-                movie = new Movie(
-                        resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getInt(4),
-                        resultSet.getString(5),
-                        resultSet.getInt(6),
-                        resultSet.getString(7));
-            }
+            resultSet.next();
+            movie = new Movie(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getInt(3),
+                    resultSet.getInt(4),
+                    resultSet.getString(5),
+                    resultSet.getInt(6),
+                    resultSet.getString(7));
         } catch(SQLException e) {
             e.printStackTrace();
         } finally {
