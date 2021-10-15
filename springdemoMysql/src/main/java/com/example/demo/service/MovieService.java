@@ -20,7 +20,7 @@ public class MovieService {
     }
 
     public String displayGreeting() {
-        return "Welcome to my application";
+        return "<h1>Welcome to my application</h1>";
     }
 
     public Movie getFirstMovie() {
@@ -49,12 +49,8 @@ public class MovieService {
         return movieRepository.getMoviesAwardWinner();
     }
 
-    public String getMovieSequels(String g1, String g2) {
-        List<Movie> lst = movieRepository.getMovieSequels(g1, g2);
-        String str1 = lst.get(0).getSubject() + ": Avg length" + " " + lst.get(0).getLength();
-        String str2 = lst.get(1).getSubject() + ": Avg length" + " " + lst.get(1).getLength();
-        String str3 = "Longest average movie length genre is '" + lst.get(0).getSubject() + "'.";
-        return str1 + " --- " + str2 + " --- " + str3;
+    public List<Movie> getMovieSequels(String g1, String g2) {
+          return movieRepository.getMovieSequels(g1, g2);
     }
 
     public List<Movie> getComedyAwardWinners() {

@@ -1,61 +1,66 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Movie;
 import com.example.demo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RestController
+@Controller
 public class MovieController {
 
-    private final MovieService movieService;
+     private final MovieService movieService;
 
-    @Autowired
-    public MovieController(MovieService movieService) {
-        this.movieService = movieService;
-    }
+     @Autowired
+     public MovieController(MovieService movieService) {
+         this.movieService = movieService;
+     }
 
-    @GetMapping()
-    public String displayGreeting() {
-        return movieService.displayGreeting();
-    }
+     @GetMapping()
+     public String displayGreeting() {
+         return "index";
+     }
 
-    @GetMapping("/getFirst")
-    public Movie getFirstMovie() {
-        return movieService.getFirstMovie();
-    }
+     @GetMapping("/getFirst")
+     public String getFirstMovie(Model model) {
+         model.addAttribute("movie", movieService.getFirstMovie());
+         return "movie";
+     }
 
     @GetMapping("/getRandom")
-    public Movie getRandomMovie() {
-        return movieService.getRandomMovie();
+    public String getRandomMovie(Model model) {
+         model.addAttribute("movie", movieService.getRandomMovie());
+         return "movie";
     }
 
     @GetMapping("/getTenSortByPopularity")
-    public List<Movie> getTopTenPopularMovies() {
-        return movieService.getTopTenPopularMovies();
+    public String getTopTenPopularMovies(Model model) {
+         model.addAttribute("movies", movieService.getTopTenPopularMovies());
+         return "movies";
     }
 
     @GetMapping("/howManyWonAnAward")
-    public int getMoviesAwardWinner() {
-        return movieService.getMoviesAwardWinner();
+    public String getMoviesAwardWinner(Model model) {
+         model.addAttribute("num", movieService.getMoviesAwardWinner());
+         return "number";
     }
 
     @GetMapping("/filter")
-    public List<Movie> getMoviesByFilter(@RequestParam char character, int amount) {
-        return movieService.getMovieByFilter(character, amount);
+    public String getMoviesByFilter(@RequestParam char character, int amount, Model model) {
+         model.addAttribute("movies", movieService.getMovieByFilter(character, amount));
+         return "movies";
     }
 
     @GetMapping("/howManySequels")
-    public String getMovieSequels(@RequestParam String g1, String g2) {
-        return movieService.getMovieSequels(g1, g2);
+    public String getMovieSequels(@RequestParam String g1, String g2, Model model) {
+         model.addAttribute("movies", movieService.getMovieSequels(g1, g2));
+         return "movies";
     }
 
     @GetMapping("/comedyAwardWinners")
-    public List<Movie> getComedyAwardWinners() {
-        return movieService.getComedyAwardWinners();
+    public String getComedyAwardWinners(Model model) {
+         model.addAttribute("movies", movieService.getComedyAwardWinners());
+         return "movies";
     }
 }
